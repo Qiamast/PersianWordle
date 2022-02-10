@@ -1,23 +1,29 @@
-Persian Wordle a Parody of Wordle
+## Persian Wordle a Parody of Wordle
 
-Persian wordle based an TypeScript , React-js , TailwindCss , Persian Words
 
-Installation and Setup Instructions
-Example:
-Clone down this repository. You will need node and npm installed globally on your machine.
+An application used to TypeScript , React-JS , TailwindCss , Persian words
+
+## Project Status
+
+This project is currently in development.
+
+## Installation and Setup Instructions
+
+
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 
 Installation:
 
-npm install
+`npm install`  
 
-To Run Test Suite:
+To Run Test Suite:  
 
-npm test
+`npm test`  
 
 To Start Server:
 
-npm start
+`npm start`  
 
 To Visit App:
 
-localhost:3000/ideas
+`localhost:3000/ideas`  
