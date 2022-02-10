@@ -1,0 +1,166 @@
+import { InformationCircleIcon } from '@heroicons/react/outline'
+import {MenuAlt2Icon as ChartBarIcon } from '@heroicons/react/outline'
+import { useState, useEffect } from 'react'
+import { Alert } from './components/alerts/Alert'
+import { Grid } from './components/grid/Grid'
+import { Keyboard } from './components/keyboard/Keyboard'
+import { AboutModal } from './components/modals/AboutModal'
+import { InfoModal } from './components/modals/InfoModal'
+import { WinModal } from './components/modals/WinModal'
+import { StatsModal } from './components/modals/StatsModal'
+import { isWordInWordList, isWinningWord, solution } from './lib/words'
+import { addStatsForCompletedGame, loadStats } from './lib/stats'
+import {
+  loadGameStateFromLocalStorage,
+  saveGameStateToLocalStorage,
+} from './lib/localStorage'
+
+function App() {
+  const [currentGuess, setCurrentGuess] = useState('')
+  const [isGameWon, setIsGameWon] = useState(false)
+  const [isWinModalOpen, setIsWinModalOpen] = useState(false)
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
+  const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
+  const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
+  const [isWordNotFoundAlertOpen, setIsWordNotFoundAlertOpen] = useState(false)
+  const [isGameLost, setIsGameLost] = useState(false)
+  const [shareComplete, setShareComplete] = useState(false)
+  const [guesses, setGuesses] = useState<string[]>(() => {
+    const loaded = loadGameStateFromLocalStorage()
+    if (loaded?.solution !== solution) {
+      return []
+    }
+    if (loaded.guesses.includes(solution)) {
+      setIsGameWon(true)
+    }
+    return loaded.guesses
+  })
+
+  const [stats, setStats] = useState(() => loadStats())
+
+  useEffect(() => {
+    saveGameStateToLocalStorage({ guesses, solution })
+  }, [guesses])
+
+  useEffect(() => {
+    if (isGameWon) {
+      setIsWinModalOpen(true)
+    }
+  }, [isGameWon])
+
+  const onChar = (value: string) => {
+    if (currentGuess.length < 5 && guesses.length < 6 && !isGameWon) {
+      setCurrentGuess(`${currentGuess}${value}`)
+    }
+  }
+
+  const onDelete = () => {
+    setCurrentGuess(currentGuess.slice(0, -1))
+  }
+
+  const onEnter = () => {
+    if (!(currentGuess.length === 5)) {
+      setIsNotEnoughLetters(true)
+      return setTimeout(() => {
+        setIsNotEnoughLetters(false)
+      }, 3000)
+    }
+
+    if (!isWordInWordList(currentGuess)) {
+      setIsWordNotFoundAlertOpen(true)
+      return setTimeout(() => {
+        setIsWordNotFoundAlertOpen(false)
+      }, 3000)
+    }
+
+    const winningWord = isWinningWord(currentGuess)
+
+    if (currentGuess.length === 5 && guesses.length < 6 && !isGameWon) {
+      setGuesses([...guesses, currentGuess])
+      setCurrentGuess('')
+
+      if (winningWord) {
+        setStats(addStatsForCompletedGame(stats, guesses.length))
+        return setIsGameWon(true)
+      }
+
+      if (guesses.length === 5) {
+        setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        setIsGameLost(true)
+        return setTimeout(() => {
+          setIsGameLost(false)
+        }, 5000)
+      }
+    }
+  }
+
+  return (
+    <div className="py-5 max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <Alert message="کلمه وارد شده کوتاه تر از حد انتظار است" isOpen={isNotEnoughLetters} />
+      <Alert message="کلمه وارد شده صحیح نیست" isOpen={isWordNotFoundAlertOpen} />
+      <Alert
+        message={`بنظر میرسه شما باختید💔 کلمه مورد نظر : ${solution}`}
+        isOpen={isGameLost}
+      />
+      <Alert
+        message="نتیجه بازی در کلیپ بورد کپی شد می تونی الان توییتش کنی 😃"
+        isOpen={shareComplete}
+        variant="success"
+      />
+      <div className="flex w-72 mx-auto items-center mb-8">
+        <InformationCircleIcon
+          className="h-6 w-6 cursor-pointer animate-pulse"
+          onClick={() => setIsInfoModalOpen(true)}
+        />
+        <h1 className="text-xl grow font-light text-center">وردل ، اما با کلمات فارسی</h1>
+        <ChartBarIcon
+          className="h-6 w-6 cursor-pointer -rotate-180"
+          onClick={() => setIsStatsModalOpen(true)}
+        />
+      </div>
+      <Grid guesses={guesses} currentGuess={currentGuess} />
+      <Keyboard
+        onChar={onChar}
+        onDelete={onDelete}
+        onEnter={onEnter}
+        guesses={guesses}
+      />
+      <WinModal
+        isOpen={isWinModalOpen}
+        handleClose={() => setIsWinModalOpen(false)}
+        guesses={guesses}
+        handleShare={() => {
+          setIsWinModalOpen(false)
+          setShareComplete(true)
+          return setTimeout(() => {
+            setShareComplete(false)
+          }, 5000)
+        }}
+      />
+      <InfoModal
+        isOpen={isInfoModalOpen}
+        handleClose={() => setIsInfoModalOpen(false)}
+      />
+      <StatsModal
+        isOpen={isStatsModalOpen}
+        handleClose={() => setIsStatsModalOpen(false)}
+        gameStats={stats}
+      />
+      <AboutModal
+        isOpen={isAboutModalOpen}
+        handleClose={() => setIsAboutModalOpen(false)}
+      />
+
+      <button
+        type="button"
+        className="mx-auto mt-10 flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-white hover:border-2 hover:border-indigo-200 focus:outline-none "
+        onClick={() => setIsAboutModalOpen(true)}
+      >
+        درباره وردل فارسی
+      </button>
+    </div>
+  )
+}
+
+export default App
