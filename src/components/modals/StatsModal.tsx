@@ -68,10 +68,17 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                     آمار شما در وردل فارسی
                   </Dialog.Title>
                   <StatBar gameStats={gameStats} />
-                  <h4 className="text-lg leading-6 font-medium text-gray-900">
+                  {/* <h4 className="text-lg leading-6 font-medium text-gray-900">
                     پراکندگی حدس های صحیح
                   </h4>
-                  <Histogram gameStats={gameStats} />
+                  <Histogram gameStats={gameStats} /> */}
+                  <div>
+                    <img
+                      src="/PersianWordle.ico"
+                      alt="Persian Wordle logo"
+                      className='m-auto'
+                      />
+                  </div>
                 </div>
               </div>
             </div>
