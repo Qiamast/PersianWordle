@@ -1,2 +1,2 @@
-const Token = 'UA-219092528-1'
+const Token = '' // Place your UA token Here!
 export default Token
