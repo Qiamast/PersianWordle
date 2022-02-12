@@ -1,5 +1,5 @@
-import { InformationCircleIcon } from '@heroicons/react/outline'
-import {MenuAlt2Icon as ChartBarIcon } from '@heroicons/react/outline'
+import { LightBulbIcon} from '@heroicons/react/outline'
+import {MenuAlt2Icon} from '@heroicons/react/outline'
 import { useState, useEffect } from 'react'
 import { Alert } from './components/alerts/Alert'
 import { Grid } from './components/grid/Grid'
@@ -109,12 +109,12 @@ function App() {
         variant="success"
       />
       <div className="flex w-72 mx-auto items-center mb-8">
-        <InformationCircleIcon
+        <LightBulbIcon
           className="h-6 w-6 cursor-pointer animate-pulse"
           onClick={() => setIsInfoModalOpen(true)}
         />
         <h1 className="text-xl grow font-light text-center">وردل ، اما با کلمات فارسی</h1>
-        <ChartBarIcon
+        <MenuAlt2Icon
           className="h-6 w-6 cursor-pointer -rotate-180"
           onClick={() => setIsStatsModalOpen(true)}
         />
