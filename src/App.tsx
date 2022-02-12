@@ -16,6 +16,7 @@ import {
 } from './lib/localStorage'
 
 import ReactGA from 'react-ga'
+import Token from './components/constants/reactGAToken'
 
 function App() {
   const [currentGuess, setCurrentGuess] = useState('')
@@ -97,7 +98,7 @@ function App() {
     }
   }
   useEffect(() => {
-    ReactGA.initialize('token')
+    ReactGA.initialize(Token)
     ReactGA.pageview('/')
   }, [])
 
@@ -161,7 +162,7 @@ function App() {
 
       <button
         type="button"
-        className="mx-auto mt-10 flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-white hover:border-2 hover:border-indigo-200 focus:outline-none "
+        className="mx-auto mt-10 flex items-center px-2.5 py-1.5 text-xs font-medium rounded text-indigo-700 bg-white focus:outline-none "
         onClick={() => setIsAboutModalOpen(true)}
       >
         درباره وردل فارسی
