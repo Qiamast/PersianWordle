@@ -15,6 +15,8 @@ import {
   saveGameStateToLocalStorage,
 } from './lib/localStorage'
 
+import ReactGA from 'react-ga'
+
 function App() {
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
@@ -94,6 +96,11 @@ function App() {
       }
     }
   }
+  useEffect(() => {
+    ReactGA.initialize('token')
+    ReactGA.pageview('/')
+  }, [])
+
 
   return (
     <div className="py-5 max-w-7xl mx-auto sm:px-6 lg:px-8">
