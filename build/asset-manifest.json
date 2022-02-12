@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3d60e7aa.css",
+    "main.js": "/static/js/main.21871efa.js",
+    "static/media/Shabnam.ttf": "/static/media/Shabnam.5b9b09c283c263361c6d.ttf",
+    "index.html": "/index.html",
+    "main.3d60e7aa.css.map": "/static/css/main.3d60e7aa.css.map",
+    "main.21871efa.js.map": "/static/js/main.21871efa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3d60e7aa.css",
+    "static/js/main.21871efa.js"
+  ]
+}
