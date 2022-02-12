@@ -1,6 +1,6 @@
 {
   "homepage": "https://persianwordle.github.io",
-  "name": "PersianWordle",
+  "name": "persian-wordle-by-qiamast",
   "version": "1.5.1",
   "private": true,
   "dependencies": {
