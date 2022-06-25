@@ -21,7 +21,7 @@ const StatItem = ({
 
 export const StatBar = ({ gameStats }: Props) => {
   return (
-    <div className="flex justify-center my-2">
+    <div className="flex justify-center my-2 dark:text-slate-300">
       <StatItem label=" بازی انجام شده" value={gameStats.totalGames} />
       <StatItem label="نرخ موفقیت" value={`${gameStats.successRate}%`} />
       <StatItem label="مسیر فعلی" value={gameStats.currentStreak} />
