@@ -118,7 +118,7 @@ function App() {
 
   return (
     <div className={theme === 'dark' ? 'dark' : ''}>
-      <div className="h-screen w-screen dark:bg-custom-black">
+      <div className="min-h-screen w-screen dark:bg-custom-black">
         <div className="py-5 max-w-7xl mx-auto sm:px-6 lg:px-8">
           <Alert
             message="کلمه وارد شده کوتاه تر از حد انتظار است"

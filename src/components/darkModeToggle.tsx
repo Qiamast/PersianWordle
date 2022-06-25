@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { SunIcon } from '@heroicons/react/outline'
 import { MoonIcon } from '@heroicons/react/outline'
 
