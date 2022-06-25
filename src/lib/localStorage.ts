@@ -1,3 +1,5 @@
+import { Theme } from '../types/theme'
+
 const gameStateKey = 'gameState'
 
 type StoredGameState = {
@@ -15,6 +17,7 @@ export const loadGameStateFromLocalStorage = () => {
 }
 
 const gameStatKey = 'gameStats'
+const themeKey = 'theme'
 
 export type GameStats = {
   winDistribution: number[]
@@ -32,4 +35,13 @@ export const saveStatsToLocalStorage = (gameStats: GameStats) => {
 export const loadStatsFromLocalStorage = () => {
   const stats = localStorage.getItem(gameStatKey)
   return stats ? (JSON.parse(stats) as GameStats) : null
+}
+
+export const saveThemeToLocalStorage = (theme: Theme) => {
+  localStorage.setItem(themeKey, theme)
+}
+export const loadThemeFromLocalStorage = () => {
+  const theme: Theme =
+    localStorage.getItem(themeKey) === 'dark' ? 'dark' : 'light'
+  return theme
 }

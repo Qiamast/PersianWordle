@@ -21,7 +21,8 @@ export const Key = ({
   const classes = classnames(
     'flex items-center justify-center rounded-lg mx-0.5 text-md font-sm cursor-pointer',
     {
-      'bg-white hover:border-2 hover:border-slate-400 active:bg-slate-400 active:text-white': !status,
+      'bg-white dark:bg-custom-gray dark:text-white hover:border-2 hover:border-slate-400 active:bg-slate-400 active:text-white ':
+        !status,
       'bg-slate-400 text-white': status === 'absent',
       'bg-green-500 hover:bg-green-600 active:bg-green-700 text-white':
         status === 'correct',

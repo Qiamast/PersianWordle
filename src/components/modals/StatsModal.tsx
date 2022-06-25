@@ -5,13 +5,21 @@ import { StatBar } from '../stats/StatBar'
 import { Histogram } from '../stats/Histogram'
 import { GameStats } from '../../lib/localStorage'
 
+import { Theme } from '../../types/theme'
+
 type Props = {
   isOpen: boolean
   handleClose: () => void
   gameStats: GameStats
+  theme: Theme
 }
 
-export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
+export const StatsModal = ({
+  isOpen,
+  handleClose,
+  gameStats,
+  theme,
+}: Props) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -19,7 +27,9 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
         className="fixed z-10 inset-0 overflow-y-auto"
         onClose={handleClose}
       >
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div
+          className={`${theme} flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0`}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -49,13 +59,13 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <div
-              className="inline-block align-bottom bg-white rounded-lg px-4 
+              className={`${theme} inline-block align-bottom bg-white rounded-lg px-4 
                             pt-5 pb-4 text-left overflow-hidden shadow-xl transform 
-                            transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6"
+                            transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6 dark:bg-zinc-900`}
             >
               <div className="absolute right-4 top-4">
                 <XCircleIcon
-                  className="h-6 w-6 cursor-pointer"
+                  className="h-6 w-6 cursor-pointer dark:text-slate-400"
                   onClick={handleClose}
                 />
               </div>
@@ -63,7 +73,7 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                 <div className="text-center">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg leading-6 font-medium text-gray-900"
+                    className="text-lg leading-6 font-medium text-gray-900 dark:text-slate-50"
                   >
                     آمار شما در وردل فارسی
                   </Dialog.Title>
@@ -76,8 +86,8 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                     <img
                       src="/PersianWordle.ico"
                       alt="Persian Wordle logo"
-                      className='m-auto'
-                      />
+                      className="m-auto"
+                    />
                   </div>
                 </div>
               </div>

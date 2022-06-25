@@ -3,20 +3,25 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Cell } from '../grid/Cell'
 import { XCircleIcon } from '@heroicons/react/outline'
 
+import { Theme } from '../../types/theme'
+
 type Props = {
   isOpen: boolean
   handleClose: () => void
+  theme: Theme
 }
 
-export const InfoModal = ({ isOpen, handleClose }: Props) => {
+export const InfoModal = ({ isOpen, handleClose, theme }: Props) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed z-10 inset-0 overflow-y-auto"
+        className="fixed z-10 inset-0 overflow-y-auto "
         onClose={handleClose}
       >
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div
+          className={`${theme} flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 `}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -45,10 +50,10 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6 dark:bg-zinc-900">
               <div className="absolute right-4 top-4">
                 <XCircleIcon
-                  className="h-6 w-6 cursor-pointer"
+                  className="h-6 w-6 cursor-pointer dark:text-slate-400"
                   onClick={() => handleClose()}
                 />
               </div>
@@ -56,16 +61,15 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
                 <div className="text-center">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg leading-6 font-medium text-gray-900"
+                    className="text-lg leading-6 font-medium text-gray-900 dark:text-slate-50"
                   >
                     قوانین بازی وردل فارسی چیه؟
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      شما در وردل فارسی شش مرتبه فرصت دارید
-                      که کلمه روز را حدس بزنید در وردل فارسی 
-                      هر روز یک کلمه منتشر می شود که همه
-                      به دنبال پیدا کردن آن هستند 
+                    <p className="text-sm text-gray-500 dark:text-slate-300">
+                      شما در وردل فارسی شش مرتبه فرصت دارید که کلمه روز را حدس
+                      بزنید در وردل فارسی هر روز یک کلمه منتشر می شود که همه به
+                      دنبال پیدا کردن آن هستند
                     </p>
 
                     <div className="flex justify-center mb-1 mt-4">
@@ -75,7 +79,7 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
                       <Cell value="ع" />
                       <Cell value="ت" />
                     </div>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-slate-300">
                       در این کلمه حرف ط درست حدس زده شده است
                     </p>
 
@@ -86,7 +90,7 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
                       <Cell value="ا" />
                       <Cell value="ن" />
                     </div>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-slate-300">
                       در این کلمه حرف ه درسته ولی در جای درستش نیست
                     </p>
 
@@ -97,7 +101,7 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
                       <Cell value="ل" status="absent" />
                       <Cell value="ه" />
                     </div>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-slate-300">
                       در این کلمه نیز حرف ل در هیچ جای کلمه موجود نیست
                     </p>
                   </div>
